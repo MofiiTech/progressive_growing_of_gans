@@ -18,6 +18,17 @@
 * ```prepare_dataset.py```: prepare the image directory for creating dataset; image augmentation is also applied here
 * ```data.csv```: a collection of image filenames and information
 
+### Data Preparation
+
+1. 272 images from 10 classes are selected for training.
+2. With data augmentation, cropping and 180 rotation, we have 2720 images ready for training.
+
+### Experiement
+
+#### Nov 30, 2019
+
+preset-v2-1gpu, fp16, VERBOSE, GRAPH, HIST
+
 ### Hardware
 
 * CPU: Intel i7-9700K

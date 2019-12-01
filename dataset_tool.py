@@ -292,7 +292,7 @@ def create_mnist(tfrecord_dir, mnist_dir):
     images = images.reshape(-1, 1, 28, 28)
     images = np.pad(images, [(0,0), (0,0), (2,2), (2,2)], 'constant', constant_values=0)
     assert images.shape == (60000, 1, 32, 32) and images.dtype == np.uint8
-    assert labels.shape == (60000,) and labels.dtype == np.uint8
+    assert labels.shape == (60000,) and labels.dtype == np.uint9
     assert np.min(images) == 0 and np.max(images) == 255
     assert np.min(labels) == 0 and np.max(labels) == 9
     onehot = np.zeros((labels.size, np.max(labels) + 1), dtype=np.float32)

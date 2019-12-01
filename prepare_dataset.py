@@ -16,9 +16,11 @@ import matplotlib.pyplot as plt
 
 classes = ['DUM1178', 'DUM1154', 'DUM1297', 'DUM1144', 'DUM1150',
            'DUM1160', 'DUM1180', 'DUM1303', 'DUM1142', 'DUM1148', 'DUM1162']
-data_csv = 'data.csv'
+data_csv = 'data-sep-30.csv'
 original_dir = os.path.join('data')
-clean_dir = os.path.join('clean_data')
+clean_dir = os.path.join('ms', 'data')
+
+save_size = (768, 768)
 
 
 def crop_image(img):
@@ -50,7 +52,7 @@ def augment_image(img):
     :param img: given image with info bar cropped if the original image has one
     :return: a list of augmented images
     """
-    if img.shape[0] == 1920 and img.shpae[1] == 2560:
+    if img.shape[0] == 1920 and img.shape[1] == 2560:
         img1 = cv2.resize(img[:, :1920], (1024, 1024))
         img2 = cv2.resize(img[:, 160:2080], (1024, 1024))
         img3 = cv2.resize(img[:, 320:2240], (1024, 1024))
@@ -62,7 +64,7 @@ def augment_image(img):
         img3 = cv2.resize(img[:, 320:1728], (1024, 1024))
         img4 = cv2.resize(img[:, 480:1888], (1024, 1024))
         img5 = cv2.resize(img[:, 640:], (1024, 1024))
-    elif img.shpae[0] == 960 and img.shape[1] == 1280:
+    elif img.shape[0] == 960 and img.shape[1] == 1280:
         img1 = cv2.resize(img[:, :960], (1024, 1024))
         img2 = cv2.resize(img[:, 80:1040], (1024, 1024))
         img3 = cv2.resize(img[:, 160:1120], (1024, 1024))
@@ -84,10 +86,16 @@ def augment_image(img):
 
 if __name__ == '__main__':
 
+    # About.
+    print('Collect images from {:s}.'.format(original_dir))
+    print('Save images to {:s}.'.format(clean_dir))
+
     # Set up directory.
     os.makedirs(clean_dir, exist_ok=True)
+    '''
     for c in classes:
         os.makedirs(os.path.join(clean_dir, c), exist_ok=True)
+    '''
 
     # Create clean dataset.
     for c in classes:
@@ -104,6 +112,7 @@ if __name__ == '__main__':
         img_names = np.asarray(rows['filename'])
         img_names = [os.path.join(original_dir, c, x)
                      for x in img_names]
+        print('Found {:d} images from class {:s}.'.format(len(img_names), c))
         for name in img_names:
             img = cv2.imread(name)
             if img is None:
@@ -117,6 +126,8 @@ if __name__ == '__main__':
             for i, im in enumerate(augmented_images):
                 save_name = base_name + '_{:d}.'.format(i) + extension
                 im = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
-                cv2.imwrite(os.path.join(clean_dir, c, save_name), im)
-            break
-        break
+                im = cv2.resize(im, save_size)
+
+                # Depend on the structure of the dataset dir.
+                # cv2.imwrite(os.path.join(clean_dir, c, save_name), im)
+                cv2.imwrite(os.path.join(clean_dir, save_name), im)
