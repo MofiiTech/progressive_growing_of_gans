@@ -29,6 +29,10 @@
 
 preset-v2-1gpu, fp16, VERBOSE, GRAPH, HIST
 
+data_augmentation
+
+image_size: 768x768
+
 ### Hardware
 
 * CPU: Intel i7-9700K

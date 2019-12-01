@@ -126,7 +126,7 @@ if __name__ == '__main__':
             for i, im in enumerate(augmented_images):
                 save_name = base_name + '_{:d}.'.format(i) + extension
                 im = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
-                im = cv2.resize(im, save_size)
+                # im = cv2.resize(im, save_size)
 
                 # Depend on the structure of the dataset dir.
                 # cv2.imwrite(os.path.join(clean_dir, c, save_name), im)
