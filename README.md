@@ -13,11 +13,6 @@
 
 ## Modifications by Mofii
 
-### Modified files
-
-* ```prepare_dataset.py```: prepare the image directory for creating dataset; image augmentation is also applied here
-* ```data.csv```: a collection of image filenames and information
-
 ### Data Preparation
 
 1. 272 images from 10 classes are selected for training.
@@ -31,7 +26,7 @@ preset-v2-1gpu, fp16, VERBOSE, GRAPH, HIST
 
 data_augmentation
 
-image_size: 768x768
+image_size: 1024x1024
 
 ### Hardware
 

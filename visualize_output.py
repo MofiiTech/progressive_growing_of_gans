@@ -71,7 +71,7 @@ if __name__ == '__main__':
     ax = fig.add_subplot(1, 3, 3)
     ax.plot(x, remaining_time)
     ax.set_xlabel('tick')
-    ax.set_ylabel('kimg/hr')
+    ax.set_ylabel('remaining time (sec)')
 
     plt.savefig('train_out_dec_01.png', dpi=200)
 
